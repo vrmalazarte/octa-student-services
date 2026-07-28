@@ -1,6 +1,8 @@
 "use client";
 
+import Image from "next/image";
 import { useState } from "react";
+
 
 type Message = {
   role: "user" | "assistant";
@@ -94,10 +96,16 @@ export default function StudentAssistant() {
       <button
         type="button"
         onClick={() => setIsOpen(true)}
-        className="fixed bottom-6 right-6 z-50 flex h-16 w-16 items-center justify-center rounded-full border border-white/15 bg-[#ff6961] text-2xl text-black shadow-2xl transition hover:scale-105"
+        className="fixed bottom-6 right-6 z-50 flex h-16 w-16 items-center justify-center rounded-full border border-white/15 bg-[#9bb8cf] shadow-2xl transition hover:scale-105"
         aria-label="Open student assistant"
       >
-        ✦
+        <Image
+          src="/octa/logo.svg"
+          alt="Open Octa Assistant"
+          width={36}
+          height={36}
+          priority
+        />
       </button>
     );
   }
@@ -111,10 +119,20 @@ export default function StudentAssistant() {
       }`}
     >
       <div className="flex h-full w-full flex-col overflow-hidden rounded-[20px] border border-white/15 bg-[#9bb8cf] text-[#29266d] shadow-2xl">
-        <header className="flex h-[58px] shrink-0 items-center justify-between px-5">
-          <p className="text-sm font-semibold">
-            Amigda University
-          </p>
+        <header className="flex h-[72px] shrink-0 items-center justify-between border-b border-white/10 px-5">
+          <div className="flex flex-col">
+            <Image
+              src="/octa/wordmark.svg"
+              alt="Octa"
+              width={120}
+              height={32}
+              priority
+            />
+
+            <p className="mt-1 text-xs text-[#29266d]/70">
+              Multi-Agent Student Services Assistant
+            </p>
+          </div>
 
           <div className="flex items-center gap-1">
             <button
@@ -144,11 +162,41 @@ export default function StudentAssistant() {
 
         <main className="flex flex-1 overflow-y-auto px-5">
           {messages.length === 0 ? (
-            <div className="flex h-full w-full items-center justify-center">
-              <h2 className="max-w-lg text-center text-xl font-semibold md:text-2xl">
-                Hi there! Welcome to Amigda University! How can I help you?
+            <div className="flex h-full w-full flex-col items-center justify-center px-8 text-center">
+              <Image
+                src="/octa/logo.svg"
+                alt="Octa"
+                width={72}
+                height={72}
+                priority
+              />
+
+              <h2 className="mt-6 text-3xl font-bold">
+                Hi, I'm Octa 👋
               </h2>
-            </div>
+
+              <p className="mt-3 max-w-sm text-sm leading-6 text-[#29266d]/70">
+                Your AI assistant for Amigda University.
+              </p>
+
+              <div className="mt-8 flex flex-wrap justify-center gap-3">
+                <span className="rounded-full bg-white/60 px-4 py-2 text-sm">
+                  Billing
+                </span>
+
+                <span className="rounded-full bg-white/60 px-4 py-2 text-sm">
+                  Schedule
+                </span>
+
+                <span className="rounded-full bg-white/60 px-4 py-2 text-sm">
+                  Student Services
+                </span>
+              </div>
+
+  <p className="mt-8 text-sm text-[#29266d]/60">
+    Ask a question below to get started.
+  </p>
+</div>
           ) : (
             <div className="flex w-full flex-col gap-3 py-5">
               {messages.map((message, index) => (
@@ -184,7 +232,7 @@ export default function StudentAssistant() {
         </main>
 
         <footer className="shrink-0 p-4">
-          <div className="rounded-[26px] bg-[#f2d8d9] px-5 py-4">
+          <div className="rounded-[26px] border border-white/20 bg-[#f2d8d9] px-5 py-4 shadow-lg">
             <input
               type="text"
               value={input}
@@ -196,7 +244,7 @@ export default function StudentAssistant() {
                   handleSend();
                 }
               }}
-              placeholder="Ask Amigda University Assistant"
+              placeholder="Ask Octa about billing, schedules, and more..."
               className="h-10 w-full bg-transparent text-[#29266d] outline-none placeholder:text-[#4f4a9a]/70"
             />
 
@@ -205,7 +253,7 @@ export default function StudentAssistant() {
                 type="button"
                 onClick={handleSend}
                 disabled={isLoading}
-                className="flex h-11 w-11 items-center justify-center rounded-full bg-[#bd6668] text-lg text-white transition hover:scale-105 disabled:cursor-not-allowed disabled:opacity-50"
+                className="flex h-11 w-11 items-center justify-center rounded-full bg-[#ff4949] text-lg text-white transition hover:scale-105 disabled:cursor-not-allowed disabled:opacity-50"
                 aria-label="Send message"
               >
                 ↑
