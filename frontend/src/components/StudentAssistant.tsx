@@ -180,17 +180,31 @@ export default function StudentAssistant() {
               </p>
 
               <div className="mt-8 flex flex-wrap justify-center gap-3">
-                <span className="rounded-full bg-white/60 px-4 py-2 text-sm">
+              <button
+                  type="button"
+                  onClick={() => setInput("What is my tuition balance?")}
+                  className="rounded-full bg-white/60 px-4 py-2 text-sm transition hover:bg-white/80 hover:shadow cursor-pointer"
+                >
                   Billing
-                </span>
+                </button>
 
-                <span className="rounded-full bg-white/60 px-4 py-2 text-sm">
+                <button
+                  type="button"
+                  onClick={() => setInput("What is my class schedule?")}
+                  className="rounded-full bg-white/60 px-4 py-2 text-sm transition hover:bg-white/80 hover:shadow cursor-pointer"
+                >
                   Schedule
-                </span>
+                </button>
 
-                <span className="rounded-full bg-white/60 px-4 py-2 text-sm">
+                <button
+                  type="button"
+                  onClick={() =>
+                    setInput("I need help with student services.")
+                  }
+                  className="rounded-full bg-white/60 px-4 py-2 text-sm transition hover:bg-white/80 hover:shadow cursor-pointer"
+                >
                   Student Services
-                </span>
+                </button>
               </div>
 
   <p className="mt-8 text-sm text-[#29266d]/60">
