@@ -202,12 +202,30 @@ export default function StudentAssistant() {
               {messages.map((message, index) => (
                 <div
                   key={index}
-                  className={`flex ${
+                  className={`flex flex-col ${
                     message.role === "user"
-                      ? "justify-end"
-                      : "justify-start"
+                      ? "items-end"
+                      : "items-start"
                   }`}
                 >
+                  {message.role === "assistant" ? (
+                    <div className="mb-2 flex items-center gap-2">
+                      <Image
+                        src="/octa/logo.svg"
+                        alt="Octa"
+                        width={20}
+                        height={20}
+                      />
+                      <span className="text-xs font-semibold text-[#29266d]/80">
+                        Octa
+                      </span>
+                    </div>
+                  ) : (
+                    <span className="mb-2 text-xs font-semibold text-[#29266d]/60">
+                      You
+                    </span>
+                  )}
+
                   <div
                     className={`max-w-[80%] rounded-[18px] px-4 py-3 text-sm leading-6 ${
                       message.role === "user"
@@ -221,15 +239,28 @@ export default function StudentAssistant() {
               ))}
 
               {isLoading && (
-                <div className="flex justify-start">
-                  <div className="rounded-[18px] bg-white/60 px-4 py-3 text-sm">
+                <div className="flex flex-col items-start">
+                  <div className="mb-2 flex items-center gap-2">
+                    <Image
+                      src="/octa/logo.svg"
+                      alt="Octa"
+                      width={20}
+                      height={20}
+                    />
+                    <span className="text-xs font-semibold text-[#29266d]/80">
+                      Octa
+                    </span>
+                  </div>
+
+                  <div className="rounded-[18px] bg-white/70 px-4 py-3 text-sm">
                     Thinking...
                   </div>
                 </div>
+               )}
+               </div>
+
               )}
-            </div>
-          )}
-        </main>
+              </main>
 
         <footer className="shrink-0 p-4">
           <div className="rounded-[26px] border border-white/20 bg-[#f2d8d9] px-5 py-4 shadow-lg">
