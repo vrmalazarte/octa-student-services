@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 
 type Message = {
@@ -30,6 +30,14 @@ export default function StudentAssistant() {
   const [isLoading, setIsLoading] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [isFullscreen, setIsFullscreen] = useState(false);
+
+  const messagesEndRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    messagesEndRef.current?.scrollIntoView({
+      behavior: "smooth",
+    });
+  }, [messages, isLoading]);
 
   async function handleSend() {    
     if (!input.trim() || isLoading) {
@@ -265,12 +273,14 @@ export default function StudentAssistant() {
                       Octa
                     </span>
                   </div>
-
+                
                   <div className="rounded-[18px] bg-white/70 px-4 py-3 text-sm">
                     Thinking...
                   </div>
                 </div>
                )}
+               
+               <div ref={messagesEndRef} />
                </div>
 
               )}
