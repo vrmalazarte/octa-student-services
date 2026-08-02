@@ -39,14 +39,16 @@ export default function StudentAssistant() {
     });
   }, [messages, isLoading]);
 
-  async function handleSend() {    
-    if (!input.trim() || isLoading) {
+  async function handleSend(customMessage?: string) {
+    const messageToSend = customMessage ?? input;
+
+    if (!messageToSend.trim() || isLoading) {
       return;
     }
 
     const userMessage: Message = {
       role: "user",
-      content: input,
+      content: messageToSend,
     };
 
     setMessages((currentMessages) => [
@@ -190,7 +192,7 @@ export default function StudentAssistant() {
               <div className="mt-8 flex flex-wrap justify-center gap-3">
               <button
                   type="button"
-                  onClick={() => setInput("What is my tuition balance?")}
+                  onClick={() => handleSend("What is my tuition balance?")}
                   className="rounded-full bg-white/60 px-4 py-2 text-sm transition hover:bg-white/80 hover:shadow cursor-pointer"
                 >
                   Billing
@@ -198,7 +200,7 @@ export default function StudentAssistant() {
 
                 <button
                   type="button"
-                  onClick={() => setInput("What is my class schedule?")}
+                  onClick={() => handleSend("What is my class schedule?")}
                   className="rounded-full bg-white/60 px-4 py-2 text-sm transition hover:bg-white/80 hover:shadow cursor-pointer"
                 >
                   Schedule
@@ -206,9 +208,7 @@ export default function StudentAssistant() {
 
                 <button
                   type="button"
-                  onClick={() =>
-                    setInput("I need help with student services.")
-                  }
+                  onClick={() => handleSend("I need help with student services.")}
                   className="rounded-full bg-white/60 px-4 py-2 text-sm transition hover:bg-white/80 hover:shadow cursor-pointer"
                 >
                   Student Services
@@ -274,11 +274,27 @@ export default function StudentAssistant() {
                     </span>
                   </div>
                 
-                  <div className="rounded-[18px] bg-white/70 px-4 py-3 text-sm">
-                    Thinking...
+                  <div className="rounded-[18px] bg-white/70 px-4 py-3">
+                  <div className="flex items-center gap-2">
+                    <span className="text-sm text-[#29266d]/70">
+                      Thinking
+                    </span>
+
+                    <div className="flex gap-1">
+                      <span className="h-2 w-2 animate-bounce rounded-full bg-[#29266d]" />
+                      <span
+                        className="h-2 w-2 animate-bounce rounded-full bg-[#29266d]"
+                        style={{ animationDelay: "0.15s" }}
+                      />
+                      <span
+                        className="h-2 w-2 animate-bounce rounded-full bg-[#29266d]"
+                        style={{ animationDelay: "0.3s" }}
+                      />
+                      </div>
+                    </div>
                   </div>
                 </div>
-               )}
+              )}
                
                <div ref={messagesEndRef} />
                </div>
@@ -291,6 +307,7 @@ export default function StudentAssistant() {
             <input
               type="text"
               value={input}
+              disabled={isLoading}
               onChange={(event) =>
                 setInput(event.target.value)
               }
@@ -300,7 +317,7 @@ export default function StudentAssistant() {
                 }
               }}
               placeholder="Ask Octa about billing, schedules, and more..."
-              className="h-10 w-full bg-transparent text-[#29266d] outline-none placeholder:text-[#4f4a9a]/70"
+              className="h-10 w-full bg-transparent text-[#29266d] outline-none placeholder:text-[#4f4a9a]/70 disabled:cursor-not-allowed disabled:opacity-60"
             />
 
             <div className="mt-3 flex items-center justify-end">
